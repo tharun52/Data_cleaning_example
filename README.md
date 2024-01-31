@@ -1,4 +1,4 @@
-# CSV to SQL Converter
+# Data Cleaning
 
 This program utilizes pandas to clean up a CSV file and generates an SQL file as the output. The example provided uses an electric report, but you can customize it to suit your requirements. Follow the comments in the code for instructions.
 
