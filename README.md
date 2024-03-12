@@ -7,3 +7,10 @@ To run the program, type the following command in your terminal:
 
 ```bash
 python main.py
+
+## Flask
+To run the flask program, type the following command in your terminal:
+
+```bash
+cd data_cleaning_flask
+flask run
