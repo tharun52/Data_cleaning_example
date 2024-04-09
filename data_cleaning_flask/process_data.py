@@ -2,8 +2,8 @@ import pandas as pd
 import pymysql
 import sqlite3
 
-def clean_table(in_host, in_username, in_password, in_database_name):
-    # Connect to the first MySQL database
+def clean_table(in_host, in_username, in_password, in_database_name, selected_table, table_name):
+    # Connect to the MySQL database
     conn_source = pymysql.connect(
         host=in_host,
         user=in_username,
@@ -12,7 +12,7 @@ def clean_table(in_host, in_username, in_password, in_database_name):
     )
 
     # Import the table into a Pandas DataFrame
-    query = 'SELECT * FROM E_report;'
+    query = f"SELECT * FROM {selected_table};"
     df = pd.read_sql(query, conn_source)
 
     # Closing the connection to the source database
@@ -41,7 +41,6 @@ def clean_table(in_host, in_username, in_password, in_database_name):
 
     # Grouping other columns by date
     grouped_df = df.groupby(df['Timestamp']).first().reset_index()
-    # the first() function returns the first non-null value of a column
 
     # If there are still multiple dates after grouping, we are grouping again by adding it up
     grouped_df = df.groupby(df['Timestamp']).sum().reset_index()
@@ -53,5 +52,27 @@ def clean_table(in_host, in_username, in_password, in_database_name):
     grouped_df.insert(9, 'TOTAL1', total1)  # inserting in specified location
     grouped_df['TOTAL2'] = total2  # creating a new column
 
-    conn_destination = sqlite3.connect("electric_report.db")
-    grouped_df.to_sql("Electric_report", conn_destination, index=False, if_exists='replace')
+    # Connect to the SQLite database
+    conn_destination = sqlite3.connect(f"{table_name}.db")
+    grouped_df.to_sql(table_name, conn_destination, index=False, if_exists='replace')
+
+# for displaying tables in the "/tables" route
+def get_tables(host, username, password, database_name):
+    # Connect to the MySQL database
+    conn = pymysql.connect(
+        host=host,
+        user=username,
+        password=password,
+        database=database_name
+    )
+
+    # Get the list of tables in the database
+    cursor = conn.cursor()
+    cursor.execute("SHOW TABLES")
+    tables = [table[0] for table in cursor.fetchall()]
+
+    # Close the connection
+    cursor.close()
+    conn.close()
+
+    return tables

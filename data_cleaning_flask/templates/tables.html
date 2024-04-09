@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Tables</title>
+</head>
+<body>
+    <h1>Available Tables:</h1>
+    <form method="post">
+        {% for table in tables %}
+            <input type="radio" id="{{ table }}" name="selected_table" value="{{ table }}">
+            <label for="{{ table }}">{{ table }}</label>
+            <input type="text" id="table_name" name="table_name" placeholder="Table Name">
+        {% endfor %}
+        <br>
+        <input type="submit" value="Clean Table">
+    </form>
+</body>
+</html>

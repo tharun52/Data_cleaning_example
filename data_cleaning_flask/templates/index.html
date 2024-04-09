@@ -6,16 +6,16 @@
     <title>Input Form</title>
 </head>
 <body>
-    <h1>Enter your information:</h1>
+    <h1>Enter your database information:</h1>
     <form method="post">
         <label for="host">Host:</label><br>
-        <input type="text" id="host" name="host"><br>
+        <input type="text" id="host" name="host" required><br>
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
+        <input type="text" id="username" name="username" required><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
+        <input type="password" id="password" name="password" required><br>
         <label for="database">Database:</label><br>
-        <input type="text" id="database" name="database"><br><br>
+        <input type="text" id="database" name="database" required><br><br>
         <input type="submit" value="Submit">
     </form>
 </body>
