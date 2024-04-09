@@ -1,6 +1,6 @@
 ### Data Cleaning with Pandas and SQL
 
-This program utilizes pandas to clean up a CSV file and generates an SQL file as the output. The example provided uses an electric report, but you can customize it to suit your requirements. Follow the comments in the code for instructions.
+This program utilizes pandas module to clean up a CSV file and generates an SQL file as the output. The example provided uses an electric report, but you can customize it to suit your requirements. Follow the comments in the code for instructions.
 
 ## Basic Python file
 
